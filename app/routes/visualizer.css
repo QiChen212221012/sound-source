@@ -1,0 +1,35 @@
+.sound-visualizer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-image: linear-gradient(to right, #ff7e5f, #feb47b);
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  
+  .parallax-container {
+    overflow: hidden;
+    height: 400px;
+    position: relative;
+  }
+  
+  .parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    transform: translateZ(-1px) scale(2);
+  }
+  
