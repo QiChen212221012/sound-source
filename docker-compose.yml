@@ -1,0 +1,39 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: development
+      MONGODB_URI: mongodb://root:example@mongo_container:27017/sound_source
+    networks:
+      - app-network
+    command: npm run dev
+
+  db:
+    image: mongo:5.0.15 # 使用 MongoDB 5.0 版本，避免最新版本的 TLS 限制
+    container_name: mongo_container
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  app-network:
+    driver: bridge

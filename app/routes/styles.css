@@ -1,0 +1,26 @@
+/* 声波可视化效果 */
+.sound-visualizer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 80px;
+}
+
+.wave-bar {
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to top, #ff7e5f, #feb47b); /* Gradient color for more vibrance */
+  margin: 0 2px;
+  border-radius: 3px;
+  transform-origin: bottom;
+  animation: waveAnimation 0.8s infinite ease-in-out; /* Faster animation for more dynamism */
+}
+
+.wave-bar:nth-child(odd) { animation-delay: 0s; }
+.wave-bar:nth-child(even) { animation-delay: 0.2s; }
+
+@keyframes waveAnimation {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(2); } /* Increased scale for a more noticeable effect */
+}
