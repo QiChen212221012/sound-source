@@ -1,4 +1,8 @@
 node_modules
 
 /.cache
+<<<<<<< HEAD
 /build
+=======
+/build
+>>>>>>> 27b1173d291fd0832cd6a8a2b327e2f00a767f43
