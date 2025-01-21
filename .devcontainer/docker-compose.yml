@@ -1,25 +1,25 @@
 version: '3.8'
 
 services:
-  app:
+  sound-source:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/app
-      - /app/node_modules
     ports:
       - "5173:5173"
     depends_on:
-      - db
+      - mongo_container
     environment:
-      NODE_ENV: development
-      MONGODB_URI: mongodb://root:example@mongo_container:27017/sound_source
+      - NODE_ENV=development
+      - MONGODB_URI=${MONGODB_URI} # Load from .env file
     networks:
       - app-network
-    command: npm run dev # 根据实际需求替换为应用的启动命令
+    command: npm run dev # Ensure this matches your app's start command
+    restart: always
 
-  db:
+  mongo_container:
     image: mongo:latest
     container_name: mongo_container
     restart: always
@@ -27,7 +27,6 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
-    command: ["mongod", "--tlsMode", "allowTLS"] # 替换 sslMode 为 tlsMode，解决 MongoDB 警告
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
